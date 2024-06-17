@@ -130,15 +130,15 @@ export default function UsersCard({
               color: blue[500],
             }}
           >
-            {name[0]}
+            {newName[0]}
           </Avatar>
           <Box>
             <Typography variant="h6" sx={{ color: grey[900] }}>
-              {name}
+              {newName}
             </Typography>
-            <Typography sx={{ color: grey[900] }}>{email}</Typography>
+            <Typography sx={{ color: grey[900] }}>{newEmail}</Typography>
             <Typography sx={{ color: grey[900] }}>
-              Highscore: {highscore}
+              Highscore: {newHighscore}
             </Typography>
           </Box>
         </Box>
