@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const Schema = mongoose.Schema;
 
@@ -19,12 +19,12 @@ const UserSchema = new Schema({
   },
   isAdmin: {
     type: Boolean,
-    default: false
+    default: false,
   },
   highscore: {
     type: Number,
-    default: 0
-  }
+    default: 0,
+  },
 });
 
 UserSchema.statics.register = async function (name, email, password) {
@@ -45,15 +45,15 @@ UserSchema.statics.register = async function (name, email, password) {
 };
 
 UserSchema.statics.login = async function (email, password) {
-    const user = await this.findOne({ email });
-    if(!user) {
-        throw new Error("Please register first.");
-    }
-    const isCorrect = await bcrypt.compare(password, user.password);
-    if(!isCorrect) {
-        throw new Error("Invalid email or password")
-    }
-    return user;
-}
+  const user = await this.findOne({ email });
+  if (!user) {
+    throw new Error("Please register first.");
+  }
+  const isCorrect = await bcrypt.compare(password, user.password);
+  if (!isCorrect) {
+    throw new Error("Invalid email or password");
+  }
+  return user;
+};
 
 module.exports = mongoose.model("User", UserSchema);
